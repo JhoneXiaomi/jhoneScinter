@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.IntegratedPackageMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.IntegratedPackage" >
+    <id column="Integrated_package_id" property="integratedPackageId" jdbcType="INTEGER" />
+    <result column="Integrated_package_name" property="integratedPackageName" jdbcType="VARCHAR" />
+    <result column="Integrated_package_describe" property="integratedPackageDescribe" jdbcType="VARCHAR" />
+    <result column="Integrated_package_image" property="integratedPackageImage" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="Integrated_package_status" property="integratedPackageStatus" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Integrated_package_id, Integrated_package_name, Integrated_package_describe, Integrated_package_image, 
+    creater, create_time, updater, update_time, branch_company, Integrated_package_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.IntegratedPackageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from integrated_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from integrated_package
+    where Integrated_package_id = #{integratedPackageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from integrated_package
+    where Integrated_package_id = #{integratedPackageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.IntegratedPackage" >
+    insert into integrated_package (Integrated_package_id, Integrated_package_name, 
+      Integrated_package_describe, Integrated_package_image, 
+      creater, create_time, updater, 
+      update_time, branch_company, Integrated_package_status
+      )
+    values (#{integratedPackageId,jdbcType=INTEGER}, #{integratedPackageName,jdbcType=VARCHAR}, 
+      #{integratedPackageDescribe,jdbcType=VARCHAR}, #{integratedPackageImage,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{branchCompany,jdbcType=VARCHAR}, #{integratedPackageStatus,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.IntegratedPackage" >
+    insert into integrated_package
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="integratedPackageId != null" >
+        Integrated_package_id,
+      </if>
+      <if test="integratedPackageName != null" >
+        Integrated_package_name,
+      </if>
+      <if test="integratedPackageDescribe != null" >
+        Integrated_package_describe,
+      </if>
+      <if test="integratedPackageImage != null" >
+        Integrated_package_image,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="integratedPackageStatus != null" >
+        Integrated_package_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="integratedPackageId != null" >
+        #{integratedPackageId,jdbcType=INTEGER},
+      </if>
+      <if test="integratedPackageName != null" >
+        #{integratedPackageName,jdbcType=VARCHAR},
+      </if>
+      <if test="integratedPackageDescribe != null" >
+        #{integratedPackageDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="integratedPackageImage != null" >
+        #{integratedPackageImage,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="integratedPackageStatus != null" >
+        #{integratedPackageStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.IntegratedPackageExample" resultType="java.lang.Integer" >
+    select count(*) from integrated_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.IntegratedPackage" >
+    update integrated_package
+    <set >
+      <if test="integratedPackageName != null" >
+        Integrated_package_name = #{integratedPackageName,jdbcType=VARCHAR},
+      </if>
+      <if test="integratedPackageDescribe != null" >
+        Integrated_package_describe = #{integratedPackageDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="integratedPackageImage != null" >
+        Integrated_package_image = #{integratedPackageImage,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="integratedPackageStatus != null" >
+        Integrated_package_status = #{integratedPackageStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where Integrated_package_id = #{integratedPackageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.IntegratedPackage" >
+    update integrated_package
+    set Integrated_package_name = #{integratedPackageName,jdbcType=VARCHAR},
+      Integrated_package_describe = #{integratedPackageDescribe,jdbcType=VARCHAR},
+      Integrated_package_image = #{integratedPackageImage,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      Integrated_package_status = #{integratedPackageStatus,jdbcType=BIT}
+    where Integrated_package_id = #{integratedPackageId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,46 @@
+.accordion .accordion-header{border-width:0 0 1px;}
+.page_check .panel-header{padding:2px 5px;border-width:0 0 1px;}
+.layout-expand_diy .panel-header{border-width:0px 1px;}
+a.rf{padding:0;}
+a.rf:hover{padding:0;background:none;border:none;}
+.accordion .bwidth{border-bottom-width:1px;}
+.adSch{background:#f0f0f0;text-align:left;}
+/*guide*/
+ul.guide{width:172px;margin:10px auto;overflow:hidden;background:url(img/guide_ul_bg.png) repeat-x;}
+ul.guide li{float:left;display:inline;background:url(img/guide_li_bg.gif) no-repeat right center;}
+ul.guide li a{display:inline-block;padding:0 20px 0 10px;height:30px;line-height:30px;color:#333;font-size:14px; font-weight:bold; font-family:"微软雅黑", "宋体", "黑体";}
+ul.guide li.last{background:none;}
+ul.guide li.cur{background:url(img/guide_cur_bg.png) repeat-x;}
+ul.guide li.cur a{color:#fff;background:url(img/guide_arrow.gif) no-repeat right center;}
+ul.guide li.last a{background:none;}
+ul.guide li.prev a{ background:url(img/guide_prev_bg.gif) no-repeat right top;}
+a.ublue{margin-left:5px;}
+a.nomargin{margin:0;}
+.detailStatic .ttl{text-indent:0;padding-left:1em;}
+.static table.forms td{padding:5px;}
+.detailStatic .panel-header,.detailStatic .panel-body{border-width:1px 0 0 1px; border-left-color:#D9D9D9;}
+.mask{width:100%;height:100%;position:absolute;top:0;left:0;z-index:999;background:#000;filter:alpha(opacity=30);-moz-opacity:0.3;-khtml-opacity:0.3;opacity: 0.3;}
+/*toolpanel*/
+.toolpanel{height:auto; background-color:#f5f6f6;}
+.toolpanel .search-bar{background:none; padding:3px 10px 8px 5px;}
+.toolpanel .sch .txt{color:#ccc;}
+.toolpanel .sch .on{color:#000;}
+.extend-panel{overflow:hidden; zoom:1; padding-top:5px; position:relative; display:none;}
+.extend-panel li{float:left; padding:8px 1em 0 0;}
+.splitline{display:inline-block; zoom:1; width:18px; border-top:2px solid #d7d7d7; margin:0 3px;}
+/*no border*/
+.allnoborder td,.allnoborder div{border:none; border-width:0;}
+.allnoborder .datagrid-row-over{background:none;}
+/*multi row toolbar*/
+.multi-toolbar{border-width:1px 0 0;}
+.multi-toolbar li{height:30px; padding-left:10px; border-bottom:1px solid #BCBCBC;}
+/*statistics*/
+.static td a{margin-right:1.5em;}
+.static td label{color:#2274C0; margin:0 1.5em 0 3px;}
+.static td .more{float:none; height:auto; line-height:1.4; padding:0; margin-left:0;}
+.static td .more:hover{background:none; border:none;}
+.static td .more span{padding:0; margin:0;}
+.static td .button{margin:6px 6px 0 0;}
+.static th{text-align:right; font-weight:bold; width:8em; white-space:nowrap;}
+/*pop border*/
+.notblbew .datagrid .panel-header,.notblbew .datagrid .panel-body{border-width:1px 0;}

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.DesignerMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.Designer" >
+    <id column="designer_id" property="designerId" jdbcType="INTEGER" />
+    <result column="designer_name" property="designerName" jdbcType="VARCHAR" />
+    <result column="designer_title" property="designerTitle" jdbcType="VARCHAR" />
+    <result column="designer_sex" property="designerSex" jdbcType="VARCHAR" />
+    <result column="designer_school" property="designerSchool" jdbcType="VARCHAR" />
+    <result column="designer_birth_place" property="designerBirthPlace" jdbcType="VARCHAR" />
+    <result column="designer_photo_img" property="designerPhotoImg" jdbcType="VARCHAR" />
+    <result column="designer_certificate_img" property="designerCertificateImg" jdbcType="VARCHAR" />
+    <result column="designer_profile" property="designerProfile" jdbcType="VARCHAR" />
+    <result column="designer_price" property="designerPrice" jdbcType="INTEGER" />
+    <result column="designer_dept" property="designerDept" jdbcType="VARCHAR" />
+    <result column="designer_work_time" property="designerWorkTime" jdbcType="VARCHAR" />
+    <result column="designer_style" property="designerStyle" jdbcType="VARCHAR" />
+    <result column="designer_idea" property="designerIdea" jdbcType="VARCHAR" />
+    <result column="designer_popularity" property="designerPopularity" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    designer_id, designer_name, designer_title, designer_sex, designer_school, designer_birth_place, 
+    designer_photo_img, designer_certificate_img, designer_profile, designer_price, designer_dept, 
+    designer_work_time, designer_style, designer_idea, designer_popularity, status, branch_company, 
+    create_time, creater, update_time, updater
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.DesignerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from designer
+    where designer_id = #{designerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from designer
+    where designer_id = #{designerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.Designer"  useGeneratedKeys="true" keyProperty="designerId">
+    insert into designer (designer_id, designer_name, designer_title, 
+      designer_sex, designer_school, designer_birth_place, 
+      designer_photo_img, designer_certificate_img, 
+      designer_profile, designer_price, designer_dept, 
+      designer_work_time, designer_style, designer_idea, 
+      designer_popularity, status, branch_company, 
+      create_time, creater, update_time, 
+      updater)
+    values (#{designerId,jdbcType=INTEGER}, #{designerName,jdbcType=VARCHAR}, #{designerTitle,jdbcType=VARCHAR}, 
+      #{designerSex,jdbcType=VARCHAR}, #{designerSchool,jdbcType=VARCHAR}, #{designerBirthPlace,jdbcType=VARCHAR}, 
+      #{designerPhotoImg,jdbcType=VARCHAR}, #{designerCertificateImg,jdbcType=VARCHAR}, 
+      #{designerProfile,jdbcType=VARCHAR}, #{designerPrice,jdbcType=INTEGER}, #{designerDept,jdbcType=VARCHAR}, 
+      #{designerWorkTime,jdbcType=VARCHAR}, #{designerStyle,jdbcType=VARCHAR}, #{designerIdea,jdbcType=VARCHAR}, 
+      #{designerPopularity,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{branchCompany,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.Designer" >
+    insert into designer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="designerName != null" >
+        designer_name,
+      </if>
+      <if test="designerTitle != null" >
+        designer_title,
+      </if>
+      <if test="designerSex != null" >
+        designer_sex,
+      </if>
+      <if test="designerSchool != null" >
+        designer_school,
+      </if>
+      <if test="designerBirthPlace != null" >
+        designer_birth_place,
+      </if>
+      <if test="designerPhotoImg != null" >
+        designer_photo_img,
+      </if>
+      <if test="designerCertificateImg != null" >
+        designer_certificate_img,
+      </if>
+      <if test="designerProfile != null" >
+        designer_profile,
+      </if>
+      <if test="designerPrice != null" >
+        designer_price,
+      </if>
+      <if test="designerDept != null" >
+        designer_dept,
+      </if>
+      <if test="designerWorkTime != null" >
+        designer_work_time,
+      </if>
+      <if test="designerStyle != null" >
+        designer_style,
+      </if>
+      <if test="designerIdea != null" >
+        designer_idea,
+      </if>
+      <if test="designerPopularity != null" >
+        designer_popularity,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        #{designerId,jdbcType=INTEGER},
+      </if>
+      <if test="designerName != null" >
+        #{designerName,jdbcType=VARCHAR},
+      </if>
+      <if test="designerTitle != null" >
+        #{designerTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="designerSex != null" >
+        #{designerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="designerSchool != null" >
+        #{designerSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="designerBirthPlace != null" >
+        #{designerBirthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="designerPhotoImg != null" >
+        #{designerPhotoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="designerCertificateImg != null" >
+        #{designerCertificateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="designerProfile != null" >
+        #{designerProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="designerPrice != null" >
+        #{designerPrice,jdbcType=INTEGER},
+      </if>
+      <if test="designerDept != null" >
+        #{designerDept,jdbcType=VARCHAR},
+      </if>
+      <if test="designerWorkTime != null" >
+        #{designerWorkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="designerStyle != null" >
+        #{designerStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="designerIdea != null" >
+        #{designerIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="designerPopularity != null" >
+        #{designerPopularity,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.DesignerExample" resultType="java.lang.Integer" >
+    select count(*) from designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.Designer" >
+    update designer
+    <set >
+      <if test="designerName != null" >
+        designer_name = #{designerName,jdbcType=VARCHAR},
+      </if>
+      <if test="designerTitle != null" >
+        designer_title = #{designerTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="designerSex != null" >
+        designer_sex = #{designerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="designerSchool != null" >
+        designer_school = #{designerSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="designerBirthPlace != null" >
+        designer_birth_place = #{designerBirthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="designerPhotoImg != null" >
+        designer_photo_img = #{designerPhotoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="designerCertificateImg != null" >
+        designer_certificate_img = #{designerCertificateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="designerProfile != null" >
+        designer_profile = #{designerProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="designerPrice != null" >
+        designer_price = #{designerPrice,jdbcType=INTEGER},
+      </if>
+      <if test="designerDept != null" >
+        designer_dept = #{designerDept,jdbcType=VARCHAR},
+      </if>
+      <if test="designerWorkTime != null" >
+        designer_work_time = #{designerWorkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="designerStyle != null" >
+        designer_style = #{designerStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="designerIdea != null" >
+        designer_idea = #{designerIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="designerPopularity != null" >
+        designer_popularity = #{designerPopularity,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where designer_id = #{designerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.Designer" >
+    update designer
+    set designer_name = #{designerName,jdbcType=VARCHAR},
+      designer_title = #{designerTitle,jdbcType=VARCHAR},
+      designer_sex = #{designerSex,jdbcType=VARCHAR},
+      designer_school = #{designerSchool,jdbcType=VARCHAR},
+      designer_birth_place = #{designerBirthPlace,jdbcType=VARCHAR},
+      designer_photo_img = #{designerPhotoImg,jdbcType=VARCHAR},
+      designer_certificate_img = #{designerCertificateImg,jdbcType=VARCHAR},
+      designer_profile = #{designerProfile,jdbcType=VARCHAR},
+      designer_price = #{designerPrice,jdbcType=INTEGER},
+      designer_dept = #{designerDept,jdbcType=VARCHAR},
+      designer_work_time = #{designerWorkTime,jdbcType=VARCHAR},
+      designer_style = #{designerStyle,jdbcType=VARCHAR},
+      designer_idea = #{designerIdea,jdbcType=VARCHAR},
+      designer_popularity = #{designerPopularity,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR}
+    where designer_id = #{designerId,jdbcType=INTEGER}
+  </update>
+</mapper>

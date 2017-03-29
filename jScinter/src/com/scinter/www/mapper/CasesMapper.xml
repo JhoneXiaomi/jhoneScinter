@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.CasesMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.Cases" >
+    <id column="case_id" property="caseId" jdbcType="INTEGER" />
+    <result column="designer_id" property="designerId" jdbcType="INTEGER" />
+    <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+    <result column="case_desc" property="caseDesc" jdbcType="VARCHAR" />
+    <result column="case_style" property="caseStyle" jdbcType="VARCHAR" />
+    <result column="case_money" property="caseMoney" jdbcType="VARCHAR" />
+    <result column="case_community" property="caseCommunity" jdbcType="VARCHAR" />
+    <result column="case_acreage" property="caseAcreage" jdbcType="DOUBLE" />
+    <result column="case_area" property="caseArea" jdbcType="VARCHAR" />
+    <result column="case_house_type" property="caseHouseType" jdbcType="VARCHAR" />
+    <result column="case_designer" property="caseDesigner" jdbcType="VARCHAR" />
+    <result column="case_thumb_img" property="caseThumbImg" jdbcType="VARCHAR" />
+    <result column="case_read_num" property="caseReadNum" jdbcType="INTEGER" />
+    <result column="seo_title" property="seoTitle" jdbcType="VARCHAR" />
+    <result column="seo_keyword" property="seoKeyword" jdbcType="VARCHAR" />
+    <result column="seo_desc" property="seoDesc" jdbcType="VARCHAR" />
+    <result column="is_hot_case" property="isHotCase" jdbcType="VARCHAR" />
+    <result column="case_status" property="caseStatus" jdbcType="INTEGER" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="community_id" property="communityId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    case_id, designer_id, case_title, case_desc, case_style, case_money, case_community, 
+    case_acreage, case_area, case_house_type, case_designer, case_thumb_img, case_read_num, 
+    seo_title, seo_keyword, seo_desc, is_hot_case, case_status, branch_company, creater, 
+    create_time, updater, update_time, community_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.CasesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cases
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cases
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cases
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.Cases" useGeneratedKeys="true" keyProperty="caseId">
+    insert into cases (case_id, designer_id, case_title, 
+      case_desc, case_style, case_money, 
+      case_community, case_acreage, case_area, 
+      case_house_type, case_designer, case_thumb_img, 
+      case_read_num, seo_title, seo_keyword, 
+      seo_desc, is_hot_case, case_status, 
+      branch_company, creater, create_time, 
+      updater, update_time, community_id
+      )
+    values (#{caseId,jdbcType=INTEGER}, #{designerId,jdbcType=INTEGER}, #{caseTitle,jdbcType=VARCHAR}, 
+      #{caseDesc,jdbcType=VARCHAR}, #{caseStyle,jdbcType=VARCHAR}, #{caseMoney,jdbcType=VARCHAR}, 
+      #{caseCommunity,jdbcType=VARCHAR}, #{caseAcreage,jdbcType=DOUBLE}, #{caseArea,jdbcType=VARCHAR}, 
+      #{caseHouseType,jdbcType=VARCHAR}, #{caseDesigner,jdbcType=VARCHAR}, #{caseThumbImg,jdbcType=VARCHAR}, 
+      #{caseReadNum,jdbcType=INTEGER}, #{seoTitle,jdbcType=VARCHAR}, #{seoKeyword,jdbcType=VARCHAR}, 
+      #{seoDesc,jdbcType=VARCHAR}, #{isHotCase,jdbcType=VARCHAR}, #{caseStatus,jdbcType=INTEGER}, 
+      #{branchCompany,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{communityId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.Cases" >
+    insert into cases
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="caseTitle != null" >
+        case_title,
+      </if>
+      <if test="caseDesc != null" >
+        case_desc,
+      </if>
+      <if test="caseStyle != null" >
+        case_style,
+      </if>
+      <if test="caseMoney != null" >
+        case_money,
+      </if>
+      <if test="caseCommunity != null" >
+        case_community,
+      </if>
+      <if test="caseAcreage != null" >
+        case_acreage,
+      </if>
+      <if test="caseArea != null" >
+        case_area,
+      </if>
+      <if test="caseHouseType != null" >
+        case_house_type,
+      </if>
+      <if test="caseDesigner != null" >
+        case_designer,
+      </if>
+      <if test="caseThumbImg != null" >
+        case_thumb_img,
+      </if>
+      <if test="caseReadNum != null" >
+        case_read_num,
+      </if>
+      <if test="seoTitle != null" >
+        seo_title,
+      </if>
+      <if test="seoKeyword != null" >
+        seo_keyword,
+      </if>
+      <if test="seoDesc != null" >
+        seo_desc,
+      </if>
+      <if test="isHotCase != null" >
+        is_hot_case,
+      </if>
+      <if test="caseStatus != null" >
+        case_status,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="communityId != null" >
+        community_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="designerId != null" >
+        #{designerId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTitle != null" >
+        #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStyle != null" >
+        #{caseStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseMoney != null" >
+        #{caseMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCommunity != null" >
+        #{caseCommunity,jdbcType=VARCHAR},
+      </if>
+      <if test="caseAcreage != null" >
+        #{caseAcreage,jdbcType=DOUBLE},
+      </if>
+      <if test="caseArea != null" >
+        #{caseArea,jdbcType=VARCHAR},
+      </if>
+      <if test="caseHouseType != null" >
+        #{caseHouseType,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesigner != null" >
+        #{caseDesigner,jdbcType=VARCHAR},
+      </if>
+      <if test="caseThumbImg != null" >
+        #{caseThumbImg,jdbcType=VARCHAR},
+      </if>
+      <if test="caseReadNum != null" >
+        #{caseReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="seoTitle != null" >
+        #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeyword != null" >
+        #{seoKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDesc != null" >
+        #{seoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isHotCase != null" >
+        #{isHotCase,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        #{caseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="communityId != null" >
+        #{communityId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.CasesExample" resultType="java.lang.Integer" >
+    select count(*) from cases
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.Cases" >
+    update cases
+    <set >
+      <if test="designerId != null" >
+        designer_id = #{designerId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTitle != null" >
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        case_desc = #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStyle != null" >
+        case_style = #{caseStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseMoney != null" >
+        case_money = #{caseMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCommunity != null" >
+        case_community = #{caseCommunity,jdbcType=VARCHAR},
+      </if>
+      <if test="caseAcreage != null" >
+        case_acreage = #{caseAcreage,jdbcType=DOUBLE},
+      </if>
+      <if test="caseArea != null" >
+        case_area = #{caseArea,jdbcType=VARCHAR},
+      </if>
+      <if test="caseHouseType != null" >
+        case_house_type = #{caseHouseType,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesigner != null" >
+        case_designer = #{caseDesigner,jdbcType=VARCHAR},
+      </if>
+      <if test="caseThumbImg != null" >
+        case_thumb_img = #{caseThumbImg,jdbcType=VARCHAR},
+      </if>
+      <if test="caseReadNum != null" >
+        case_read_num = #{caseReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="seoTitle != null" >
+        seo_title = #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeyword != null" >
+        seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDesc != null" >
+        seo_desc = #{seoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isHotCase != null" >
+        is_hot_case = #{isHotCase,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        case_status = #{caseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="communityId != null" >
+        community_id = #{communityId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.Cases" >
+    update cases
+    set designer_id = #{designerId,jdbcType=INTEGER},
+      case_title = #{caseTitle,jdbcType=VARCHAR},
+      case_desc = #{caseDesc,jdbcType=VARCHAR},
+      case_style = #{caseStyle,jdbcType=VARCHAR},
+      case_money = #{caseMoney,jdbcType=VARCHAR},
+      case_community = #{caseCommunity,jdbcType=VARCHAR},
+      case_acreage = #{caseAcreage,jdbcType=DOUBLE},
+      case_area = #{caseArea,jdbcType=VARCHAR},
+      case_house_type = #{caseHouseType,jdbcType=VARCHAR},
+      case_designer = #{caseDesigner,jdbcType=VARCHAR},
+      case_thumb_img = #{caseThumbImg,jdbcType=VARCHAR},
+      case_read_num = #{caseReadNum,jdbcType=INTEGER},
+      seo_title = #{seoTitle,jdbcType=VARCHAR},
+      seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+      seo_desc = #{seoDesc,jdbcType=VARCHAR},
+      is_hot_case = #{isHotCase,jdbcType=VARCHAR},
+      case_status = #{caseStatus,jdbcType=INTEGER},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      community_id = #{communityId,jdbcType=INTEGER}
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </update>
+</mapper>

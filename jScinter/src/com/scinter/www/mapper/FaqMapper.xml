@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.FaqMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.Faq" >
+    <id column="faq_id" property="faqId" jdbcType="INTEGER" />
+    <result column="faq_image" property="faqImage" jdbcType="VARCHAR" />
+    <result column="faq_desc" property="faqDesc" jdbcType="VARCHAR" />
+    <result column="faq_answer" property="faqAnswer" jdbcType="VARCHAR" />
+    <result column="faq_type" property="faqType" jdbcType="VARCHAR" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="faq_status" property="faqStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    faq_id, faq_image, faq_desc, faq_answer, faq_type, branch_company, faq_status, create_time, 
+    creater, update_time, updater
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.FaqExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from faq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from faq
+    where faq_id = #{faqId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from faq
+    where faq_id = #{faqId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.Faq" useGeneratedKeys="true" keyProperty="faqId">
+    insert into faq (faq_id, faq_image, faq_desc, 
+      faq_answer, faq_type, branch_company, 
+      faq_status, create_time, creater, 
+      update_time, updater)
+    values (#{faqId,jdbcType=INTEGER}, #{faqImage,jdbcType=VARCHAR}, #{faqDesc,jdbcType=VARCHAR}, 
+      #{faqAnswer,jdbcType=VARCHAR}, #{faqType,jdbcType=VARCHAR}, #{branchCompany,jdbcType=VARCHAR}, 
+      #{faqStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.Faq" >
+    insert into faq
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="faqId != null" >
+        faq_id,
+      </if>
+      <if test="faqImage != null" >
+        faq_image,
+      </if>
+      <if test="faqDesc != null" >
+        faq_desc,
+      </if>
+      <if test="faqAnswer != null" >
+        faq_answer,
+      </if>
+      <if test="faqType != null" >
+        faq_type,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="faqStatus != null" >
+        faq_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="faqId != null" >
+        #{faqId,jdbcType=INTEGER},
+      </if>
+      <if test="faqImage != null" >
+        #{faqImage,jdbcType=VARCHAR},
+      </if>
+      <if test="faqDesc != null" >
+        #{faqDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="faqAnswer != null" >
+        #{faqAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="faqType != null" >
+        #{faqType,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="faqStatus != null" >
+        #{faqStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.FaqExample" resultType="java.lang.Integer" >
+    select count(*) from faq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.Faq" >
+    update faq
+    <set >
+      <if test="faqImage != null" >
+        faq_image = #{faqImage,jdbcType=VARCHAR},
+      </if>
+      <if test="faqDesc != null" >
+        faq_desc = #{faqDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="faqAnswer != null" >
+        faq_answer = #{faqAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="faqType != null" >
+        faq_type = #{faqType,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="faqStatus != null" >
+        faq_status = #{faqStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where faq_id = #{faqId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.Faq" >
+    update faq
+    set faq_image = #{faqImage,jdbcType=VARCHAR},
+      faq_desc = #{faqDesc,jdbcType=VARCHAR},
+      faq_answer = #{faqAnswer,jdbcType=VARCHAR},
+      faq_type = #{faqType,jdbcType=VARCHAR},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      faq_status = #{faqStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR}
+    where faq_id = #{faqId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.CommunitysMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.Communitys" >
+    <id column="community_id" property="communityId" jdbcType="INTEGER" />
+    <result column="community_name" property="communityName" jdbcType="VARCHAR" />
+    <result column="community_image" property="communityImage" jdbcType="VARCHAR" />
+    <result column="community_description" property="communityDescription" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="community_cases" property="communityCases" jdbcType="INTEGER" />
+    <result column="sign_number" property="signNumber" jdbcType="INTEGER" />
+    <result column="activity_url" property="activityUrl" jdbcType="VARCHAR" />
+    <result column="is_hot" property="isHot" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    community_id, community_name, community_image, community_description, status, branch_company, 
+    create_time, update_time, creater, updater, community_cases, sign_number, activity_url, 
+    is_hot
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.CommunitysExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from communitys
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from communitys
+    where community_id = #{communityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from communitys
+    where community_id = #{communityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.Communitys" >
+    insert into communitys (community_id, community_name, community_image, 
+      community_description, status, branch_company, 
+      create_time, update_time, creater, 
+      updater, community_cases, sign_number, 
+      activity_url, is_hot)
+    values (#{communityId,jdbcType=INTEGER}, #{communityName,jdbcType=VARCHAR}, #{communityImage,jdbcType=VARCHAR}, 
+      #{communityDescription,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{branchCompany,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{communityCases,jdbcType=INTEGER}, #{signNumber,jdbcType=INTEGER}, 
+      #{activityUrl,jdbcType=VARCHAR}, #{isHot,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.Communitys" >
+    insert into communitys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="communityId != null" >
+        community_id,
+      </if>
+      <if test="communityName != null" >
+        community_name,
+      </if>
+      <if test="communityImage != null" >
+        community_image,
+      </if>
+      <if test="communityDescription != null" >
+        community_description,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="communityCases != null" >
+        community_cases,
+      </if>
+      <if test="signNumber != null" >
+        sign_number,
+      </if>
+      <if test="activityUrl != null" >
+        activity_url,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="communityId != null" >
+        #{communityId,jdbcType=INTEGER},
+      </if>
+      <if test="communityName != null" >
+        #{communityName,jdbcType=VARCHAR},
+      </if>
+      <if test="communityImage != null" >
+        #{communityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="communityDescription != null" >
+        #{communityDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="communityCases != null" >
+        #{communityCases,jdbcType=INTEGER},
+      </if>
+      <if test="signNumber != null" >
+        #{signNumber,jdbcType=INTEGER},
+      </if>
+      <if test="activityUrl != null" >
+        #{activityUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.CommunitysExample" resultType="java.lang.Integer" >
+    select count(*) from communitys
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.Communitys" >
+    update communitys
+    <set >
+      <if test="communityName != null" >
+        community_name = #{communityName,jdbcType=VARCHAR},
+      </if>
+      <if test="communityImage != null" >
+        community_image = #{communityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="communityDescription != null" >
+        community_description = #{communityDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="communityCases != null" >
+        community_cases = #{communityCases,jdbcType=INTEGER},
+      </if>
+      <if test="signNumber != null" >
+        sign_number = #{signNumber,jdbcType=INTEGER},
+      </if>
+      <if test="activityUrl != null" >
+        activity_url = #{activityUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where community_id = #{communityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.Communitys" >
+    update communitys
+    set community_name = #{communityName,jdbcType=VARCHAR},
+      community_image = #{communityImage,jdbcType=VARCHAR},
+      community_description = #{communityDescription,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      community_cases = #{communityCases,jdbcType=INTEGER},
+      sign_number = #{signNumber,jdbcType=INTEGER},
+      activity_url = #{activityUrl,jdbcType=VARCHAR},
+      is_hot = #{isHot,jdbcType=VARCHAR}
+    where community_id = #{communityId,jdbcType=INTEGER}
+  </update>
+</mapper>

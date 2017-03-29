@@ -1,0 +1,10 @@
+[{
+"id":1,
+"iconCls":"tree-icon userManege",
+"text":"<a href='currentUser.jsp' target='frameright'>个人信息</a>"
+},
+{
+"id":2,
+"iconCls":"tree-icon distribute",
+"text":"<a href='password.jsp' target='frameright'>修改密码</a>"
+}]

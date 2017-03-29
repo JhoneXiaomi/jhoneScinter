@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.SysLog" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="desc_name" property="descName" jdbcType="VARCHAR" />
+    <result column="operation_type" property="operationType" jdbcType="VARCHAR" />
+    <result column="main_key" property="mainKey" jdbcType="INTEGER" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+    <result column="log_status" property="logStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    log_id, desc_name, operation_type, main_key, table_name, log_status, create_time, 
+    creater
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.SysLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.SysLog"  useGeneratedKeys="true" keyProperty="logId">
+    insert into sys_log (log_id, desc_name, operation_type, 
+      main_key, table_name, log_status, 
+      create_time, creater)
+    values (#{logId,jdbcType=INTEGER}, #{descName,jdbcType=VARCHAR}, #{operationType,jdbcType=VARCHAR}, 
+      #{mainKey,jdbcType=INTEGER}, #{tableName,jdbcType=VARCHAR}, #{logStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.SysLog" >
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="descName != null" >
+        desc_name,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="mainKey != null" >
+        main_key,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="logStatus != null" >
+        log_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="descName != null" >
+        #{descName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="mainKey != null" >
+        #{mainKey,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null" >
+        #{logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.SysLogExample" resultType="java.lang.Integer" >
+    select count(*) from sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.SysLog" >
+    update sys_log
+    <set >
+      <if test="descName != null" >
+        desc_name = #{descName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null" >
+        operation_type = #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="mainKey != null" >
+        main_key = #{mainKey,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null" >
+        log_status = #{logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.SysLog" >
+    update sys_log
+    set desc_name = #{descName,jdbcType=VARCHAR},
+      operation_type = #{operationType,jdbcType=VARCHAR},
+      main_key = #{mainKey,jdbcType=INTEGER},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      log_status = #{logStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

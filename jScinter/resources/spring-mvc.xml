@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.scinter.www.controller" />
+
+	<!-- 注解请求映射  -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">       
+		<property name="interceptors">
+		    <list>  
+		    	<!-- <ref bean="logNDCInteceptor"/>   日志拦截器，这是你自定义的拦截器
+		    	<ref bean="myRequestHelperInteceptor"/>   RequestHelper拦截器，这是你自定义的拦截器 
+		    	<ref bean="myPermissionsInteceptor"/>  权限拦截器，这是你自定义的拦截器 
+		    	<ref bean="myUserInfoInteceptor"/>  用户信息拦截器，这是你自定义的拦截器  -->
+		    </list>        
+		</property>        
+	</bean>  	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">  
+			<list>  
+				<ref bean="byteArray_hmc" />  
+				<ref bean="string_hmc" />  
+				<ref bean="resource_hmc" />  
+				<ref bean="source_hmc" />  
+				<ref bean="xmlAwareForm_hmc" />  
+				<ref bean="jaxb2RootElement_hmc" />  
+				<ref bean="jackson_hmc" />  
+			</list>  
+		</property>  
+	</bean>  
+	<bean id="byteArray_hmc" class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /><!-- 处理.. -->
+	<bean id="string_hmc" class="org.springframework.http.converter.StringHttpMessageConverter" /><!-- 处理.. -->
+	<bean id="resource_hmc" class="org.springframework.http.converter.ResourceHttpMessageConverter" /><!-- 处理.. -->
+	<bean id="source_hmc" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" /><!-- 处理.. -->
+	<bean id="xmlAwareForm_hmc" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" /><!-- 处理.. -->
+	<bean id="jaxb2RootElement_hmc" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" /><!-- 处理.. -->
+	<bean id="jackson_hmc" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" /><!-- 处理json-->
+
+	<!-- Kaptcha验证码 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">  
+        <property name="config">  
+            <bean class="com.google.code.kaptcha.util.Config">  
+                <constructor-arg>  
+                    <props>  
+                        <prop key="kaptcha.border">no</prop>  
+                        <prop key="kaptcha.textproducer.font.color">red</prop>
+                        <prop key="kaptcha.image.width">360</prop>  
+                        <prop key="kaptcha.textproducer.font.size">80</prop>  
+                        <prop key="kaptcha.image.height">100</prop>
+                        <prop key="kaptcha.session.key">code</prop>
+                    	<prop key="kaptcha.textproducer.char.string">0123456789qwertyuiopasdfghjklzxcvbnm</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.textproducer.font.names">Arial,宋体,楷体,微软雅黑</prop> 
+                    </props>  
+                </constructor-arg>  
+            </bean>  
+        </property>  
+    </bean>
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
+		<property name="supportedMediaTypes">
+		<list> <value>text/html;charset=UTF-8</value></list> 
+		</property>
+		<property name="objectMapper" ref="dateTimeMapper"></property>
+	</bean>
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 
+		<property name="messageConverters">
+			<list> <ref bean="mappingJacksonHttpMessageConverter"/> </list>
+		</property>
+	</bean>
+	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 支持上传10M文件 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="utf-8"></property>   
+        <property name="maxUploadSize" value="10485760"></property>  
+        <property name="maxInMemorySize" value="40960"></property>  
+    </bean>
+    
+	<!-- json转换器 -->
+	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json;charset=UTF-8" />
+		<property name="objectMapper" ref="dateTimeMapper"></property>
+	</bean>
+	
+	<!-- json对象日期格式化 -->	
+	<bean id="dateTimeMapper" class="com.scinter.www.util.DateTimeMapper"></bean>
+	
+	
+	<mvc:annotation-driven>
+        <mvc:message-converters>  
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+                <property name="objectMapper" ref="dateTimeMapper"></property>
+                <property name="supportedMediaTypes">  
+	                <list>
+	                	<value>text/html;charset=UTF-8</value>
+	                    <value>text/json;charset=UTF-8</value>
+	                    <value>application/json;charset=UTF-8</value>
+	                </list>
+            </property>   
+            </bean>
+        </mvc:message-converters>  
+    </mvc:annotation-driven>  
+	
+</beans>

@@ -1,0 +1,22 @@
+#数据库更日志 张志伟
+#repair 数据表增加了 id int 11 允许为空
+#repair 数据表修改了 repair_id varchar(30) 允许为空
+#repair 数据表增加    build_name varchar(100) 允许为空
+#faq 数据表增加    faq_stauts int(1) 允许为空
+#    alter table `nick`.`faq` add column `faq_stauts` int(1) NULL after `branch_company`;
+#cases  数据表里增加了  designer_id  int(11) 可以为空   (调试可以为空，但是实际不能为空)
+#    alter table `nick`.`cases` add column `designer_id` int(11) NULL after `case_id`;
+
+#repair   数据表里增加了 字段 repair_status int (11) 可以为空(调试可以为空，但是实际不能为空)
+#    alter table `nick`.`repair` add column `repair_status` int(11) NULL COMMENT '在线报修单的状态0 已处理，1 处理中，2未处理' after `branch_company`;
+
+
+#order 表里增加字段,order_status int(1)  
+#      alter table `nick`.`order_info` add column `order_status` int(1) NULL COMMENT '在线订单的状态 0表示未处理，1，处理中2已处理' after `create_time`;
+
+#sys_config 增加branch_company字段 varchar(100) 允许为空
+
+
+# 2016-09-02 工作日志		
+
+修改 sys_config  value	字段的长度

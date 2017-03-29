@@ -1,0 +1,24 @@
+===========================================
+# 2016-07-28 工作日志
+
+
+一 、页面操作
+1.添加网站真是数据的测试
+2.网站首页三种新消息的展示
+3.修改 HomeColler 147lines  
+	for(int i=0; i<CasesLists.size() || i<5; i++){ 
+				===>>> for(int i=0; i<CasesLists.size() && i<5; i++){ 
+	
+	
+二、数据库操作
+
+1.更改数据表 cases  creater
+ALTER TABLE `nick`.`cases` CHANGE `creater` `creater` VARCHAR(20) CHARSET utf8 COLLATE utf8_general_ci NULL; 
+ 	
+2.更改数据表 cases  updater
+ALTER TABLE `nick`.`cases` CHANGE `updater` `updater` VARCHAR(20) CHARSET utf8 COLLATE utf8_general_ci NULL; 
+
+
+# 2016-09-02 工作日志		
+
+修改 sys_config  value	字段的长度

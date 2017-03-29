@@ -1,0 +1,31 @@
+[{
+"id":1,
+"iconCls":"tree-icon userManege",
+"text":"<a href='userList.jsp' id='userlist' target='frameright'>用户管理</a>"
+},
+{
+"id":2,
+"iconCls":"tree-icon roleEdit",
+"text":"<a href='roleList.jsp' target='frameright'>角色管理</a>"
+},
+{
+"id":3,
+"iconCls":"tree-icon online",
+"text":"<a href='userOnlineList.jsp' target='frameright'>在线用户</a>"
+},
+{
+"id":4,
+"iconCls":"tree-icon tree-approvalset",
+"text":"<a href='sys_logList.jsp' target='frameright'>系统日志</a>"
+},
+{
+"id":5,
+"iconCls":"tree-icon safe",
+"text":"<a href='showSysSafe' target='frameright'>安全选项</a>"
+},
+{
+"id":6,
+"iconCls":"tree-icon else",
+"text":"<a href='showSysOther' target='frameright'>其他选项</a>"
+}
+]

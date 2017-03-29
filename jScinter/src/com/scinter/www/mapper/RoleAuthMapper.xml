@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.RoleAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.RoleAuth" >
+    <id column="auth_id" property="authId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="sypz" property="sypz" jdbcType="INTEGER" />
+    <result column="zxal" property="zxal" jdbcType="INTEGER" />
+    <result column="sjtd" property="sjtd" jdbcType="INTEGER" />
+    <result column="lpxx" property="lpxx" jdbcType="INTEGER" />
+    <result column="zjgd" property="zjgd" jdbcType="INTEGER" />
+    <result column="hxdp" property="hxdp" jdbcType="INTEGER" />
+    <result column="zxzx" property="zxzx" jdbcType="INTEGER" />
+    <result column="zxdd" property="zxdd" jdbcType="INTEGER" />
+    <result column="zxbx" property="zxbx" jdbcType="INTEGER" />
+    <result column="zxwd" property="zxwd" jdbcType="INTEGER" />
+    <result column="lypl" property="lypl" jdbcType="INTEGER" />
+    <result column="zxxgt" property="zxxgt" jdbcType="INTEGER" />
+    <result column="xzhd" property="xzhd" jdbcType="INTEGER" />
+    <result column="xzxw" property="xzxw" jdbcType="INTEGER" />
+    <result column="schd" property="schd" jdbcType="INTEGER" />
+    <result column="zxfg" property="zxfg" jdbcType="INTEGER" />
+    <result column="rbwzx" property="rbwzx" jdbcType="INTEGER" />
+    <result column="rbwhd" property="rbwhd" jdbcType="INTEGER" />
+    <result column="rmxq" property="rmxq" jdbcType="INTEGER" />
+    <result column="rrlzxal" property="rrlzxal" jdbcType="INTEGER" />
+    <result column="syhdlb" property="syhdlb" jdbcType="INTEGER" />
+    <result column="lftc" property="lftc" jdbcType="INTEGER" />
+    <result column="syhdlbm" property="syhdlbm" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    auth_id, role_id, sypz, zxal, sjtd, lpxx, zjgd, hxdp, zxzx, zxdd, zxbx, zxwd, lypl, 
+    zxxgt, xzhd, xzxw, schd, zxfg, rbwzx, rbwhd, rmxq, rrlzxal, syhdlb, lftc, syhdlbm
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.RoleAuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from role_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_auth
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from role_auth
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.RoleAuth" useGeneratedKeys="true" keyProperty="authId">
+    insert into role_auth (auth_id, role_id, sypz, 
+      zxal, sjtd, lpxx, zjgd, 
+      hxdp, zxzx, zxdd, zxbx, 
+      zxwd, lypl, zxxgt, 
+      xzhd, xzxw, schd, zxfg, 
+      rbwzx, rbwhd, rmxq, 
+      rrlzxal, syhdlb, lftc, 
+      syhdlbm)
+    values (#{authId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{sypz,jdbcType=INTEGER}, 
+      #{zxal,jdbcType=INTEGER}, #{sjtd,jdbcType=INTEGER}, #{lpxx,jdbcType=INTEGER}, #{zjgd,jdbcType=INTEGER}, 
+      #{hxdp,jdbcType=INTEGER}, #{zxzx,jdbcType=INTEGER}, #{zxdd,jdbcType=INTEGER}, #{zxbx,jdbcType=INTEGER}, 
+      #{zxwd,jdbcType=INTEGER}, #{lypl,jdbcType=INTEGER}, #{zxxgt,jdbcType=INTEGER}, 
+      #{xzhd,jdbcType=INTEGER}, #{xzxw,jdbcType=INTEGER}, #{schd,jdbcType=INTEGER}, #{zxfg,jdbcType=INTEGER}, 
+      #{rbwzx,jdbcType=INTEGER}, #{rbwhd,jdbcType=INTEGER}, #{rmxq,jdbcType=INTEGER}, 
+      #{rrlzxal,jdbcType=INTEGER}, #{syhdlb,jdbcType=INTEGER}, #{lftc,jdbcType=INTEGER}, 
+      #{syhdlbm,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.RoleAuth" >
+    insert into role_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        auth_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="sypz != null" >
+        sypz,
+      </if>
+      <if test="zxal != null" >
+        zxal,
+      </if>
+      <if test="sjtd != null" >
+        sjtd,
+      </if>
+      <if test="lpxx != null" >
+        lpxx,
+      </if>
+      <if test="zjgd != null" >
+        zjgd,
+      </if>
+      <if test="hxdp != null" >
+        hxdp,
+      </if>
+      <if test="zxzx != null" >
+        zxzx,
+      </if>
+      <if test="zxdd != null" >
+        zxdd,
+      </if>
+      <if test="zxbx != null" >
+        zxbx,
+      </if>
+      <if test="zxwd != null" >
+        zxwd,
+      </if>
+      <if test="lypl != null" >
+        lypl,
+      </if>
+      <if test="zxxgt != null" >
+        zxxgt,
+      </if>
+      <if test="xzhd != null" >
+        xzhd,
+      </if>
+      <if test="xzxw != null" >
+        xzxw,
+      </if>
+      <if test="schd != null" >
+        schd,
+      </if>
+      <if test="zxfg != null" >
+        zxfg,
+      </if>
+      <if test="rbwzx != null" >
+        rbwzx,
+      </if>
+      <if test="rbwhd != null" >
+        rbwhd,
+      </if>
+      <if test="rmxq != null" >
+        rmxq,
+      </if>
+      <if test="rrlzxal != null" >
+        rrlzxal,
+      </if>
+      <if test="syhdlb != null" >
+        syhdlb,
+      </if>
+      <if test="lftc != null" >
+        lftc,
+      </if>
+      <if test="syhdlbm != null" >
+        syhdlbm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        #{authId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="sypz != null" >
+        #{sypz,jdbcType=INTEGER},
+      </if>
+      <if test="zxal != null" >
+        #{zxal,jdbcType=INTEGER},
+      </if>
+      <if test="sjtd != null" >
+        #{sjtd,jdbcType=INTEGER},
+      </if>
+      <if test="lpxx != null" >
+        #{lpxx,jdbcType=INTEGER},
+      </if>
+      <if test="zjgd != null" >
+        #{zjgd,jdbcType=INTEGER},
+      </if>
+      <if test="hxdp != null" >
+        #{hxdp,jdbcType=INTEGER},
+      </if>
+      <if test="zxzx != null" >
+        #{zxzx,jdbcType=INTEGER},
+      </if>
+      <if test="zxdd != null" >
+        #{zxdd,jdbcType=INTEGER},
+      </if>
+      <if test="zxbx != null" >
+        #{zxbx,jdbcType=INTEGER},
+      </if>
+      <if test="zxwd != null" >
+        #{zxwd,jdbcType=INTEGER},
+      </if>
+      <if test="lypl != null" >
+        #{lypl,jdbcType=INTEGER},
+      </if>
+      <if test="zxxgt != null" >
+        #{zxxgt,jdbcType=INTEGER},
+      </if>
+      <if test="xzhd != null" >
+        #{xzhd,jdbcType=INTEGER},
+      </if>
+      <if test="xzxw != null" >
+        #{xzxw,jdbcType=INTEGER},
+      </if>
+      <if test="schd != null" >
+        #{schd,jdbcType=INTEGER},
+      </if>
+      <if test="zxfg != null" >
+        #{zxfg,jdbcType=INTEGER},
+      </if>
+      <if test="rbwzx != null" >
+        #{rbwzx,jdbcType=INTEGER},
+      </if>
+      <if test="rbwhd != null" >
+        #{rbwhd,jdbcType=INTEGER},
+      </if>
+      <if test="rmxq != null" >
+        #{rmxq,jdbcType=INTEGER},
+      </if>
+      <if test="rrlzxal != null" >
+        #{rrlzxal,jdbcType=INTEGER},
+      </if>
+      <if test="syhdlb != null" >
+        #{syhdlb,jdbcType=INTEGER},
+      </if>
+      <if test="lftc != null" >
+        #{lftc,jdbcType=INTEGER},
+      </if>
+      <if test="syhdlbm != null" >
+        #{syhdlbm,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.RoleAuthExample" resultType="java.lang.Integer" >
+    select count(*) from role_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.RoleAuth" >
+    update role_auth
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="sypz != null" >
+        sypz = #{sypz,jdbcType=INTEGER},
+      </if>
+      <if test="zxal != null" >
+        zxal = #{zxal,jdbcType=INTEGER},
+      </if>
+      <if test="sjtd != null" >
+        sjtd = #{sjtd,jdbcType=INTEGER},
+      </if>
+      <if test="lpxx != null" >
+        lpxx = #{lpxx,jdbcType=INTEGER},
+      </if>
+      <if test="zjgd != null" >
+        zjgd = #{zjgd,jdbcType=INTEGER},
+      </if>
+      <if test="hxdp != null" >
+        hxdp = #{hxdp,jdbcType=INTEGER},
+      </if>
+      <if test="zxzx != null" >
+        zxzx = #{zxzx,jdbcType=INTEGER},
+      </if>
+      <if test="zxdd != null" >
+        zxdd = #{zxdd,jdbcType=INTEGER},
+      </if>
+      <if test="zxbx != null" >
+        zxbx = #{zxbx,jdbcType=INTEGER},
+      </if>
+      <if test="zxwd != null" >
+        zxwd = #{zxwd,jdbcType=INTEGER},
+      </if>
+      <if test="lypl != null" >
+        lypl = #{lypl,jdbcType=INTEGER},
+      </if>
+      <if test="zxxgt != null" >
+        zxxgt = #{zxxgt,jdbcType=INTEGER},
+      </if>
+      <if test="xzhd != null" >
+        xzhd = #{xzhd,jdbcType=INTEGER},
+      </if>
+      <if test="xzxw != null" >
+        xzxw = #{xzxw,jdbcType=INTEGER},
+      </if>
+      <if test="schd != null" >
+        schd = #{schd,jdbcType=INTEGER},
+      </if>
+      <if test="zxfg != null" >
+        zxfg = #{zxfg,jdbcType=INTEGER},
+      </if>
+      <if test="rbwzx != null" >
+        rbwzx = #{rbwzx,jdbcType=INTEGER},
+      </if>
+      <if test="rbwhd != null" >
+        rbwhd = #{rbwhd,jdbcType=INTEGER},
+      </if>
+      <if test="rmxq != null" >
+        rmxq = #{rmxq,jdbcType=INTEGER},
+      </if>
+      <if test="rrlzxal != null" >
+        rrlzxal = #{rrlzxal,jdbcType=INTEGER},
+      </if>
+      <if test="syhdlb != null" >
+        syhdlb = #{syhdlb,jdbcType=INTEGER},
+      </if>
+      <if test="lftc != null" >
+        lftc = #{lftc,jdbcType=INTEGER},
+      </if>
+      <if test="syhdlbm != null" >
+        syhdlbm = #{syhdlbm,jdbcType=INTEGER},
+      </if>
+    </set>
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.RoleAuth" >
+    update role_auth
+    set role_id = #{roleId,jdbcType=INTEGER},
+      sypz = #{sypz,jdbcType=INTEGER},
+      zxal = #{zxal,jdbcType=INTEGER},
+      sjtd = #{sjtd,jdbcType=INTEGER},
+      lpxx = #{lpxx,jdbcType=INTEGER},
+      zjgd = #{zjgd,jdbcType=INTEGER},
+      hxdp = #{hxdp,jdbcType=INTEGER},
+      zxzx = #{zxzx,jdbcType=INTEGER},
+      zxdd = #{zxdd,jdbcType=INTEGER},
+      zxbx = #{zxbx,jdbcType=INTEGER},
+      zxwd = #{zxwd,jdbcType=INTEGER},
+      lypl = #{lypl,jdbcType=INTEGER},
+      zxxgt = #{zxxgt,jdbcType=INTEGER},
+      xzhd = #{xzhd,jdbcType=INTEGER},
+      xzxw = #{xzxw,jdbcType=INTEGER},
+      schd = #{schd,jdbcType=INTEGER},
+      zxfg = #{zxfg,jdbcType=INTEGER},
+      rbwzx = #{rbwzx,jdbcType=INTEGER},
+      rbwhd = #{rbwhd,jdbcType=INTEGER},
+      rmxq = #{rmxq,jdbcType=INTEGER},
+      rrlzxal = #{rrlzxal,jdbcType=INTEGER},
+      syhdlb = #{syhdlb,jdbcType=INTEGER},
+      lftc = #{lftc,jdbcType=INTEGER},
+      syhdlbm = #{syhdlbm,jdbcType=INTEGER}
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </update>
+</mapper>

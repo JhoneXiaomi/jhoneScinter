@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.News" >
+    <id column="news_id" property="newsId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="read_num" property="readNum" jdbcType="INTEGER" />
+    <result column="thumb_img" property="thumbImg" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="contents" property="contents" jdbcType="VARCHAR" />
+    <result column="seo_title" property="seoTitle" jdbcType="VARCHAR" />
+    <result column="seo_keyword" property="seoKeyword" jdbcType="VARCHAR" />
+    <result column="seo_desc" property="seoDesc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_hot_news" property="isHotNews" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    news_id, title, type, author, source, read_num, thumb_img, keywords, contents, seo_title, 
+    seo_keyword, seo_desc, status, branch_company, creater, create_time, updater, update_time, 
+    is_hot_news
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.NewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.News" useGeneratedKeys="true" keyProperty="newsId">
+    insert into news (news_id, title, type, 
+      author, source, read_num, 
+      thumb_img, keywords, contents, 
+      seo_title, seo_keyword, seo_desc, 
+      status, branch_company, creater, 
+      create_time, updater, update_time, 
+      is_hot_news)
+    values (#{newsId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{readNum,jdbcType=INTEGER}, 
+      #{thumbImg,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{contents,jdbcType=VARCHAR}, 
+      #{seoTitle,jdbcType=VARCHAR}, #{seoKeyword,jdbcType=VARCHAR}, #{seoDesc,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{branchCompany,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isHotNews,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsId != null" >
+        news_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="readNum != null" >
+        read_num,
+      </if>
+      <if test="thumbImg != null" >
+        thumb_img,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="contents != null" >
+        contents,
+      </if>
+      <if test="seoTitle != null" >
+        seo_title,
+      </if>
+      <if test="seoKeyword != null" >
+        seo_keyword,
+      </if>
+      <if test="seoDesc != null" >
+        seo_desc,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isHotNews != null" >
+        is_hot_news,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsId != null" >
+        #{newsId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="readNum != null" >
+        #{readNum,jdbcType=INTEGER},
+      </if>
+      <if test="thumbImg != null" >
+        #{thumbImg,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null" >
+        #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="seoTitle != null" >
+        #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeyword != null" >
+        #{seoKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDesc != null" >
+        #{seoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isHotNews != null" >
+        #{isHotNews,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.NewsExample" resultType="java.lang.Integer" >
+    select count(*) from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.News" >
+    update news
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="readNum != null" >
+        read_num = #{readNum,jdbcType=INTEGER},
+      </if>
+      <if test="thumbImg != null" >
+        thumb_img = #{thumbImg,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null" >
+        contents = #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="seoTitle != null" >
+        seo_title = #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeyword != null" >
+        seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDesc != null" >
+        seo_desc = #{seoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isHotNews != null" >
+        is_hot_news = #{isHotNews,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.News" >
+    update news
+    set title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      read_num = #{readNum,jdbcType=INTEGER},
+      thumb_img = #{thumbImg,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      contents = #{contents,jdbcType=VARCHAR},
+      seo_title = #{seoTitle,jdbcType=VARCHAR},
+      seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+      seo_desc = #{seoDesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_hot_news = #{isHotNews,jdbcType=VARCHAR}
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+</mapper>

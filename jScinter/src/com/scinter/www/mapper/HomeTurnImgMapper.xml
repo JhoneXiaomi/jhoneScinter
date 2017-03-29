@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scinter.www.dao.HomeTurnImgMapper" >
+  <resultMap id="BaseResultMap" type="com.scinter.www.model.HomeTurnImg" >
+    <id column="homeImg_id" property="homeimgId" jdbcType="INTEGER" />
+    <result column="homeImg_url" property="homeimgUrl" jdbcType="VARCHAR" />
+    <result column="homeImg_name" property="homeimgName" jdbcType="VARCHAR" />
+    <result column="homeImg_src" property="homeimgSrc" jdbcType="VARCHAR" />
+    <result column="branch_company" property="branchCompany" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="homeImg_alt" property="homeimgAlt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    homeImg_id, homeImg_url, homeImg_name, homeImg_src, branch_company, creater, create_time, 
+    updater, update_time, state, homeImg_alt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scinter.www.model.HomeTurnImgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from home_turn_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="page != null" >
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from home_turn_img
+    where homeImg_id = #{homeimgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from home_turn_img
+    where homeImg_id = #{homeimgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scinter.www.model.HomeTurnImg" useGeneratedKeys="true" keyProperty="homeImgId">
+    insert into home_turn_img (homeImg_id, homeImg_url, homeImg_name, 
+      homeImg_src, branch_company, creater, 
+      create_time, updater, update_time, 
+      state, homeImg_alt)
+    values (#{homeimgId,jdbcType=INTEGER}, #{homeimgUrl,jdbcType=VARCHAR}, #{homeimgName,jdbcType=VARCHAR}, 
+      #{homeimgSrc,jdbcType=VARCHAR}, #{branchCompany,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{homeimgAlt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scinter.www.model.HomeTurnImg" >
+    insert into home_turn_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="homeimgId != null" >
+        homeImg_id,
+      </if>
+      <if test="homeimgUrl != null" >
+        homeImg_url,
+      </if>
+      <if test="homeimgName != null" >
+        homeImg_name,
+      </if>
+      <if test="homeimgSrc != null" >
+        homeImg_src,
+      </if>
+      <if test="branchCompany != null" >
+        branch_company,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="homeimgAlt != null" >
+        homeImg_alt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="homeimgId != null" >
+        #{homeimgId,jdbcType=INTEGER},
+      </if>
+      <if test="homeimgUrl != null" >
+        #{homeimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="homeimgName != null" >
+        #{homeimgName,jdbcType=VARCHAR},
+      </if>
+      <if test="homeimgSrc != null" >
+        #{homeimgSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null" >
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="homeimgAlt != null" >
+        #{homeimgAlt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scinter.www.model.HomeTurnImgExample" resultType="java.lang.Integer" >
+    select count(*) from home_turn_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scinter.www.model.HomeTurnImg" >
+    update home_turn_img
+    <set >
+      <if test="homeimgUrl != null" >
+        homeImg_url = #{homeimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="homeimgName != null" >
+        homeImg_name = #{homeimgName,jdbcType=VARCHAR},
+      </if>
+      <if test="homeimgSrc != null" >
+        homeImg_src = #{homeimgSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null" >
+        branch_company = #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="homeimgAlt != null" >
+        homeImg_alt = #{homeimgAlt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where homeImg_id = #{homeimgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scinter.www.model.HomeTurnImg" >
+    update home_turn_img
+    set homeImg_url = #{homeimgUrl,jdbcType=VARCHAR},
+      homeImg_name = #{homeimgName,jdbcType=VARCHAR},
+      homeImg_src = #{homeimgSrc,jdbcType=VARCHAR},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      homeImg_alt = #{homeimgAlt,jdbcType=VARCHAR}
+    where homeImg_id = #{homeimgId,jdbcType=INTEGER}
+  </update>
+</mapper>

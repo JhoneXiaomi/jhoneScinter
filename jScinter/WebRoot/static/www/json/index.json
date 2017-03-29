@@ -1,0 +1,68 @@
+[
+{
+"id":1,
+"name":"zxal",
+"iconCls":"tree-icon tree-checkset",
+"text":"<a href='caseList.jsp' target='frameright'>装修案例</a>"
+},
+{
+"id":2,
+"name":"sjtd",
+"iconCls":"tree-icon tree-file userManege",
+"text":"<a href='designerList.jsp' target='frameright'>设计团队</a>"
+},
+{
+"id":3,
+"name":"lpxx",
+"iconCls":"tree-icon tree-checkclass",
+"text":"<a href='hotBuildingList.jsp' target='frameright'>楼盘信息</a>"
+},
+{
+"id":4,
+"name":"zjgd",
+"iconCls":"tree-icon tree-recheckflow",
+"text":"<a href='hotBulidingSiteList.jsp' target='frameright'>在建工地</a>"
+},
+{
+"id":5,
+"name":"hxdp",
+"iconCls":"tree-icon tree-checkset",
+"text":"<a href='houseTypeReviewList.jsp' target='frameright'>户型点评</a>"
+},
+{
+"id":6,
+"name":"zxzx",
+"iconCls":"tree-icon tree-approvalset",
+"text":"<a href='newsList.jsp' target='frameright'>装修资讯</a>"
+},
+{
+"id":7,
+"name":"zxdd",
+"iconCls":"tree-icon tree-icon-reactivity",
+"text":"<a href='orderList.jsp' target='frameright'>在线订单</a>"
+},
+{
+"id":8,
+"name":"zxbx",
+"iconCls":"tree-icon tree-checkflow",
+"text":"<a href='repairList.jsp' target='frameright'>在线报修</a>"
+},
+{
+"id":9,
+"name":"zxwd",
+"iconCls":"tree-icon action",
+"text":"<a href='faqList.jsp' target='frameright'>装修问答</a>"
+},
+{
+"id":10,
+"name":"lypl",
+"iconCls":"tree-icon tree-checktype",
+"text":"<a href='commentList.jsp' target='frameright'>留言评论</a>"
+},
+{
+"id":11,
+"name":"zxxgt",
+"iconCls":"tree-icon tree-checkset",
+"text":"<a href='fitMentList.jsp' target='frameright'>装修效果图</a>"
+}
+]
