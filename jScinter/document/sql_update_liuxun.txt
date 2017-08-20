@@ -1,8 +1,0 @@
-#数据库变更日志 liuxun
-
-修改了role_auth表 增加了首页配置字段
-
-house_type_review增加了thumb_img缩略图字段 varchar 200 
-
-
-
